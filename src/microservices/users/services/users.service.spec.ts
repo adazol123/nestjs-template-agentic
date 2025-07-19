@@ -22,7 +22,24 @@ describe('UsersService', () => {
       const createUserDto = {
         name: 'Test User',
         email: 'test@example.com',
-        password: 'password123',
+const createUserDto = {
+        name: 'Test User',
+        email: 'test@example.com',
+        password: process.env.TEST_USER_PASSWORD, // Use environment variable for test password
+      };
+
+      const user = service.create(createUserDto);
+      expect(user).toHaveProperty('id');
+      expect(user.name).toEqual(createUserDto.name);
+      expect(user.email).toEqual(createUserDto.email);
+      expect(user.password).toBeDefined();
+      expect(user).toHaveProperty('createdAt');
+      expect(user).toHaveProperty('updatedAt');
+    });
+  });
+
+  // ... rest of the code remains unchanged
+});
       };
 
       const user = service.create(createUserDto);
